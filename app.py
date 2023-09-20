@@ -5,7 +5,7 @@ app = Flask(__name__)
 def ask_question():
     question = request.json['question']
     # Your Python program logic here
-    return "Your answer"
+    return print("Your answer")
 
 if __name__ == '__main__':
     app.run(debug=True)
