@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -15,7 +14,6 @@
             FB.AppEvents.logPageView();
         };
 
-        // Load the SDK asynchronously
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
@@ -23,20 +21,36 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        async function getSentiment() {
+            const text = document.getElementById('userText').value;
+            const response = await fetch('/analyze_sentiment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: text })
+            });
+            const data = await response.json();
+            console.log("Sentiment Score:", data);
+        }
+
+        // Your Facebook-related functions here (like checkLoginState)
     </script>
 </head>
 
 <body>
-
     <h1>Ask a Question</h1>
     <input type="text" id="userQuestion" placeholder="Your question here">
     <button onclick="askQuestion()">Ask</button>
 
-    <!-- Facebook Login Button should be after other elements and before your script.js -->
+    <h1>Sentiment Analysis with NLTK and Flask</h1>
+    <input type="text" id="userText" placeholder="Enter text here...">
+    <button onclick="getSentiment()">Analyze Sentiment</button>
+
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>

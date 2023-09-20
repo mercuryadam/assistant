@@ -1,3 +1,10 @@
+// Functions for sentiment analysis
+function askQuestion() {
+    const question = document.getElementById('userQuestion').value;
+    // Implement an API call or whatever logic you want to apply here
+}
+
+
 // Function to handle Facebook login
 function loginWithFacebook() {
     FB.login(function (response) {
